@@ -1,21 +1,20 @@
 import React from "react";
 
 
-export const Navbar = () => {
+export const Navbar = ({relations = [{}]}) => {
+    const eur = Math.round(relations.find(el => el.currency === "UAH").relation * 100)/100
+    const usd = Math.round(relations.find(el => el.currency === "UAH").relation / relations.find(el => el.currency === "USD").relation*100)/100
     return (
         <>
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">CONVERTER</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <div id="navbarNav" className="align-items-center d-flex">
+                    <ul class="curse-nav">
+                        <li class="mx-3 nav-item text-light">
+                            EUR: {eur}
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
+                        <li class="nav-item text-light">
+                            USD: {usd}
                         </li>
                     </ul>
                 </div>
