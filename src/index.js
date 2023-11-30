@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 const defaultState = {
-  currencies: ["eur", "uah", "usd"]
+  currencies: ["EUR", "UAH", "USD"]
 }
 
 const reducer = (state = defaultState, action) => {
