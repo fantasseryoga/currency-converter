@@ -1,22 +1,43 @@
-import { React, useState } from "react"
+import { React, useEffect, useState } from "react"
 import { Navbar } from "../components/Navbar"
 import "../styles/home.scss"
 import { useSelector } from "react-redux"
+import { useHttp } from "../hooks/http.hook"
 
 
 export const HomePage = () => {
+    const {request} = useHttp()
     const currencies = useSelector(state => state.currencies)
+    const [relationships, setRelationships] = useState({
+        eur: 1,
+        usd: 0,
+        uah: 0
+    })
     const [form, setForm] = useState({
-        firstCurrency: null,
-        secondCurrency: null,
-        firstCurrencyValue: null,
-        secondCurrencyValue: null
+        firstCurrency: "eur",
+        secondCurrency: "eur",
+        firstCurrencyValue: 0,
+        secondCurrencyValue: 0
     })
 
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
-    console.log(form)
+
+    const calculateForm = (name) => {
+        if(name === "firstCurrency" || name === "secondCurrency"){
+
+        }
+    }
+
+    useEffect(() => {
+        console.log("re")
+        request("http://data.fixer.io/api/latest?access_key=324781ab05a87e630e8d1b233c6c684e", "GET").then(data => data.json()).then(data => {
+            setRelationships({...relationships, usd: data.rates["USD"], uah: data.rates["UAH"]})
+        })
+
+    }, [])
+
     return (
         <>
             <Navbar />
