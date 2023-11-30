@@ -1,10 +1,22 @@
-import { React } from "react"
+import { React, useState } from "react"
 import { Navbar } from "../components/Navbar"
 import "../styles/home.scss"
+import { useSelector } from "react-redux"
 
 
 export const HomePage = () => {
+    const currencies = useSelector(state => state.currencies)
+    const [form, setForm] = useState({
+        firstCurrency: null,
+        secondCurrency: null,
+        firstCurrencyValue: null,
+        secondCurrencyValue: null
+    })
 
+    const changeHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+    }
+    console.log(form)
     return (
         <>
             <Navbar />
@@ -13,31 +25,31 @@ export const HomePage = () => {
                 <div class="card-body">
                     <div className="d-flex">
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button" />
+                            <select class="form-select" aria-label="Default select example" name="firstCurrency" onChange={changeHandler}>
+                                {
+                                    currencies.map(el => {
+                                        return (
+                                            <option value={el}>{el.toUpperCase()}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                            <input type="number" class="form-control" aria-label="Text input with dropdown button" name="firstCurrencyValue" onChange={changeHandler} />
                         </div>
-                        to
+                        <span className="mx-5">
+                            to
+                        </span>
                         <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                    <div role="separator" class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Separated link</a>
-                                </div>
-                            </div>
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button" />
+                            <select class="form-select" aria-label="Default select example" name="secondCurrency" onChange={changeHandler} >
+                                {
+                                    currencies.map(el => {
+                                        return (
+                                            <option value={el}>{el.toUpperCase()}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                            <input type="number" class="form-control" aria-label="Text input with dropdown button" name="secondCurrencyValue" onChange={changeHandler} />
                         </div>
                     </div>
                 </div>
