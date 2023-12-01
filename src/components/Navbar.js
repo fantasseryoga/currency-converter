@@ -11,10 +11,10 @@ export const Navbar = ({relations = [{}]}) => {
                 <div id="navbarNav" className="align-items-center d-flex">
                     <ul class="curse-nav">
                         <li class="mx-3 nav-item text-light">
-                            EUR: {eur}
+                            EUR : {eur}
                         </li>
                         <li class="nav-item text-light">
-                            USD: {usd}
+                            USD : {usd}
                         </li>
                     </ul>
                 </div>

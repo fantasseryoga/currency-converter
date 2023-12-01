@@ -54,7 +54,7 @@ export const HomePage = () => {
     }
 
     useEffect(() => {
-        request("http://data.fixer.io/api/latest?access_key=324781ab05a87e630e8d1b233c6c684e", "GET").then(data => data.json()).then(data => {
+        request("http://data.fixer.io/api/latest?access_key=e13a8a987a670458fdd5f514fa2ffac1", "GET").then(data => data.json()).then(data => {
             const newRelations = currencies.map(el => {
                 return (
                     {
